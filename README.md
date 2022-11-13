@@ -37,13 +37,13 @@ Most importantly, the website makes use of the Cocktail DB API which can be foun
 
 This is the heart of the website's functionability. It defines the logic of each one of the html pages as well as other functions such as sessions or DB. This file imports the following libraries in order to function well:
 
-'''python
+```python
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, session, flash
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from subcode import user_search, random_search, login_required
-'''
+```
 
 The functions within the app.py file are the following:
 
