@@ -35,19 +35,26 @@ Most importantly, the website makes use of the Cocktail DB API which can be foun
 
 ### App.py file description:
 
-This is the heart of the website's functionability. It defines the logic of each one of the html pages as well as other functions such as sessions or DB. This file imports the following libraries in order to function well:
+This is the heart of the website's functionability. It defines the logic of each one of the html pages as well as other functions such as sessions or DB. This file imports the following libraries:
 
 ```python
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, session, flash
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from subcode import user_search, random_search, login_required
+from subcode import user_search, random_search, login_required *This functions will be explained on the subcode.py section!
 ```
 
 The functions within the app.py file are the following:
 
-- **Main menu (layout. html)**: 
+- **def register()**: This function creates the logic behind the register.html. When the register page is loaded it simply shoes the register.html; once in the page, via the "post" method that gets executed once the "Register" button is clicked, it adds the new username and password to the users.db's *users* table. However, before adding the new username and password it check the following things:
+  1. The username field is not empty
+  2. The password field is not empty
+  3. The password confirmation field is not empty
+  4. The password and confirmation fields have the same information
+  5. That the username has not been taken yet.
+ 
+In case that one of the previous conditions is not satisfied, the program sends a flash message explaining which condition has not been satisfied. In case that all conditions are satisfied, the program then adds the username and password (after being hashed) to the DB and sends the user to the login page.
 
 - **Homepage (index.html)**: 
 
@@ -57,9 +64,14 @@ The functions within the app.py file are the following:
 
 - **Recipe(recipe.html)**: 
 
-- **Saved (saved.html)**: 
+- **def saved()**:  
 
-- **Search (search.html)**: 
+- **def search()**: This function is the logic for the search.html. When the search page loads, the user sees the search.html. The page will ask the user to write the name of the cocktail that he or she wants to check. When the user writes the cocktail name and clicks on the "Search" button, the "post" method gets executed and searches for the user's cocktail through the user_search() function that uses the Cocktail DB API. The first thing that the code does is to check that the search field is not empty. In case it is, the program sends a flash message telling the user to type a cocktail name. In case that the filed is not empty, first all spaces are replaced by a underscore and then the user_search code is run to find the cocktail information. In case that there are no cocktails with that name a flash message is sent saying that the cocktail does not exist. In case it does, the code gets the cocktail's API to extract the following data:
 
-
+  1. Name
+  2. Image
+  3. Ingredients
+  4. Instructions
+  
+All this information is sent to the recipe.html page to display the search result to the user.
 
