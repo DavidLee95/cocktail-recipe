@@ -33,7 +33,7 @@ Most importantly, the website makes use of the Cocktail DB API which can be foun
 
 - **Search (search.html)**: This menu allows the user to type the cocktail's name that the user wants to search for. In case that the user types a cocktail name that does not exist, the website flashes an error message. In case that the user does type a cocktail that does exist, it redirects the user to the "recipe.html" page to display the cocktail recipe that the user is searching for. The page uses a form with a "search" input and button with "post" as its method in order to request the cocktail's search.
 
-### App.py file description:
+### App.py code description:
 
 This is the heart of the website's functionability. It defines the logic of each one of the html pages as well as other functions such as sessions or DB. This file imports the following libraries:
 
@@ -114,3 +114,11 @@ The functions within the app.py file are the following:
   4. Instructions
  
   This information is sent to the recipe.html page, where the user will see the end result!
+
+### Subcode.py code description: 
+
+This is a sub file that has three functions that will be imported to the app.py code.
+
+- **def user_search(name)**:
+- **def random_search()**:
+- **def login_required(f)**:
