@@ -71,7 +71,9 @@ In case that one of the previous conditions is not satisfied, the program sends 
   3. Ingredients
   4. Instructions
 
-If the user wants to remove a cocktail from the list, the code obtains the name of the cocktail and then uses sqlite functions to remove that particular cocktail from the users.db's list table. After removing the cocktail from the list, the same page is reloaded but now without the removed cocktail!
+  If the user wants to remove a cocktail from the list, the code obtains the name of the cocktail and then uses sqlite functions to remove that 
+  particular cocktail from the users.db's list table. After removing the cocktail from the list, the same page is reloaded but now without the removed 
+  cocktail!
 
 - **def search()**: This function is the logic for the search.html. When the search page loads, the user sees the search.html. The page will ask the user to write the name of the cocktail that he or she wants to check. When the user writes the cocktail name and clicks on the "Search" button, the "post" method gets executed and searches for the user's cocktail through the user_search() function from the subcode.py file that uses the Cocktail DB API. The first thing that the code does is to check that the search field is not empty. In case it is, the program sends a flash message telling the user to type a cocktail name. In case that the filed is not empty, first all spaces are replaced by a underscore and then the user_search code is run to find the cocktail information. In case that there are no cocktails with that name a flash message is sent saying that the cocktail does not exist. In case it does, the code gets the information to extract the following data:
 
