@@ -48,21 +48,41 @@ from subcode import user_search, random_search, login_required #This functions w
 The functions within the app.py file are the following:
 
 - **def register()**: This function creates the logic behind the register.html. When the register page is loaded it simply shows the register.html; once in the page, via the "post" method that gets executed once the "Register" button is clicked, it adds the new username and password to the users.db's *users* table. However, before adding the new username and password it check the following things:
+
   1. The username field is not empty
   2. The password field is not empty
   3. The password confirmation field is not empty
   4. The password and confirmation fields have the same information
   5. That the username has not been taken yet.
  
-In case that one of the previous conditions is not satisfied, the program sends a flash message explaining which condition has not been satisfied. In case that all conditions are satisfied, the program then adds the username and password (after being hashed) to the DB and sends the user to the login page.
+  In case that one of the previous conditions is not satisfied, the program sends a flash     
+  message explaining which condition has not been satisfied. In case that all conditions are 
+  satisfied, the program then adds the username and password (after being hashed) to the DB 
+  and sends the user to the login page.
 
-- **Homepage (index.html)**: 
+- **def index()**: The index.html page is the website's main home page. In this page, the user can perform the following actions: click on the "Search a cocktail's recipe of your choice!" to be redirected to the search.html page (anchor tag) or get the recipe of one of the six drinks that are shown ("post" method). When the user clicks on one of the recipe links, the code determines which cocktail the user chose and based on it obtains the recipe information. Once the information is gotten, the code looks for the following information:
 
-- **Login (login.html)**: 
+  1. Name
+  2. Image
+  3. Ingredients
+  4. Instructions
 
-- **Register (register.html)**: 
+  This information is sent to the recipe.html page to display the recipe to the user.
+  
+- **def login()**: This function handles the login logic of the login.html page. Once the user is on the login page, he or she has the option to either enter the correct credentials and login or to register. In case the user wants to register and clicks on the "register" box, he or she will be redirected to the register.html page. In case that the user wants to login, when the user clicks on the login button the code checks the following:
 
-- **Recipe(recipe.html)**: 
+  1. The username field is not empty
+  2. The password field is not empty
+  3. The username does exist (from users.db)
+  4. The password is correct (from users.db)
+
+  In case that a condition is incorrect, a flash message will be displayed telling the user 
+  which condition is incorrect. In case that all conditions are correct, the user is logged in  
+  and redirected to the index.html page (home).
+
+- **def logout()**: The logic for the logout.html page is simple. When the user clicks on the logout button, the program clears the current session and redirects the user to the index.html page(home).
+
+- **def recipe()**: This logic controls the recipe.html page. In this page, the user can see the recipe of the cocktail that he or she chose. If the user wishes to save this recipe, he or she can simply click on the "Save Drink" button ("post" method) and add it to the saved list in the users.db file. The user is then redirected to the "saved.html" page, and a flash message appears telling the user if the cocktail was succesfully added or if previously it was already added.
 
 - **def saved()**: This is the logic for the saved.html page. When the page is loaded, the user sees in the screen a list of his or her saved cocktail. This is achieved by obtaining from the users.db's list table the corresponding data and displaying it. In this page the user can do two things via the "post" method: see a drink's recipe or remove it from the saved list. When the user wants to see a drink's recipe, the program uses the user_search() function from the subcode.py file to obtain the following data which later sends it to the recipe.html page to display the result to the user:
 
@@ -71,9 +91,10 @@ In case that one of the previous conditions is not satisfied, the program sends 
   3. Ingredients
   4. Instructions
 
-  If the user wants to remove a cocktail from the list, the code obtains the name of the cocktail and then uses sqlite functions to remove that 
-  particular cocktail from the users.db's list table. After removing the cocktail from the list, the same page is reloaded but now without the removed 
-  cocktail!
+  If the user wants to remove a cocktail from the list, the code obtains the name of the 
+  cocktail and then uses sqlite functions to remove that particular cocktail from the 
+  users.db's list table. After removing the cocktail from the list, the same page is reloaded 
+  but now without the removed cocktail!
 
 - **def search()**: This function is the logic for the search.html. When the search page loads, the user sees the search.html. The page will ask the user to write the name of the cocktail that he or she wants to check. When the user writes the cocktail name and clicks on the "Search" button, the "post" method gets executed and searches for the user's cocktail through the user_search() function from the subcode.py file that uses the Cocktail DB API. The first thing that the code does is to check that the search field is not empty. In case it is, the program sends a flash message telling the user to type a cocktail name. In case that the filed is not empty, first all spaces are replaced by a underscore and then the user_search code is run to find the cocktail information. In case that there are no cocktails with that name a flash message is sent saying that the cocktail does not exist. In case it does, the code gets the information to extract the following data:
 
@@ -82,7 +103,8 @@ In case that one of the previous conditions is not satisfied, the program sends 
   3. Ingredients
   4. Instructions
   
-All this information is sent to the recipe.html page to display the search result to the user.
+  All this information is sent to the recipe.html page to display the search result to the 
+  user.
 
 - **def random()**: This is the logic for the random.html. This function does not have a "post" method. When the user clicks on the random menu, the code uses the random_search() function from the subcode.py file in order to find random cocktail's information. Once the information is found, the code obtains the following data:
 
@@ -91,4 +113,4 @@ All this information is sent to the recipe.html page to display the search resul
   3. Ingredients
   4. Instructions
  
-This information is sent to the recipe.html page, where the user will see the end result!
+  This information is sent to the recipe.html page, where the user will see the end result!
